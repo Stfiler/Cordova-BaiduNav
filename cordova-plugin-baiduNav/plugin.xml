@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin id="cordova-plugin-BaiduMapNav" verstion="0.0.1">
+    <name>BaiduMap</name>
+    <description>BaiduMap Plugin</description>
+
+    <engines>
+        <engine name="cordova" version=">=3.5.0" />
+    </engines>
+
+    <!--js-->
+    <js-module src="www/baiduNav.js">
+        <clobbers target="BaiduMapNav" />
+    </js-module>
+
+    <!--iOS-->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="CDVBaiduNav">
+                <param name="ios-package" value="CDVBaiduNav" />
+            </feature>
+        </config-file>
+
+        <!--Info.plist-->
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>只有开启定位功能才能正常使用百度导航</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+            <string>只有开启定位功能才能正常使用百度导航</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>audio</string>
+                <string>location</string>
+            </array>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="UIViewControllerBasedStatusBarAppearance">
+            <false/>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+            <array>
+                <string>baidumap</string>
+            </array>
+        </config-file>
+
+        <!--framework-->
+        <framework src="AudioToolbox.framework" />
+        <framework src="ImageIO.framework" />
+        <framework src="CoreMotion.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="MediaPlayer.framework" />
+        <framework src="AVFoundation.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="JavaScriptCore.framework" />
+        <framework src="Security.framework" />
+        <framework src="OpenGLES.framework" />
+        <framework src="GLKit.framework" />
+        <framework src="libstdc++.6.0.9.tbd" />
+        <framework src="libsqlite3.0.tbd" />
+        <framework src="libz.1.2.5.tbd" />
+
+        <resource-file src="src/ios/libs/BaiduNaviSDK/baiduNaviSDK.bundle" />
+        <source-file   src="src/ios/libs/BaiduNaviSDK/libbaiduNaviSDK.a" framework="true" />
+
+        <header-file  src="src/ios/libs/BaiduNaviSDK/inc/BNCommonDef.h"/>
+        <header-file  src="src/ios/libs/BaiduNaviSDK/inc/BNCoreServices.h"/>
+        <header-file  src="src/ios/libs/BaiduNaviSDK/inc/BNLocation.h"/>
+        <header-file  src="src/ios/libs/BaiduNaviSDK/inc/BNLocationManagerProtocol.h"/>
+        <header-file  src="src/ios/libs/BaiduNaviSDK/inc/BNRoutePlanManagerProtocol.h"/>
+        <header-file  src="src/ios/libs/BaiduNaviSDK/inc/BNRoutePlanModel.h"/>
+        <header-file  src="src/ios/libs/BaiduNaviSDK/inc/BNStrategyManagerProtocol.h"/>
+        <header-file  src="src/ios/libs/BaiduNaviSDK/inc/BNUIManagerProtocol.h"/>
+
+        <!--self-->
+        <source-file src="src/ios/CDVBaiduNav.h" />
+        <source-file src="src/ios/CDVBaiduNav.m" />
+        <source-file src="src/ios/PhoneGPSViewController.h" />
+        <source-file src="src/ios/PhoneGPSViewController.m" />
+        
+    </platform>
+</plugin>
